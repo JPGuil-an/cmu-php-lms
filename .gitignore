@@ -1,0 +1,17 @@
+/config.host.php
+/config.local.php
+.env*
+!/.env.example
+/.cpanel/
+/.softaculous/
+/.override
+/.htaccess -
+/DO NOT UPLOAD FILES HERE
+/files for your website should be uploaded here!
+/index2.html
+*.zip
+*.sql
+*.log
+/storage/*
+!/storage/.htaccess
+/public/uploads/

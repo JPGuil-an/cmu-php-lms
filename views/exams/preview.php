@@ -1,0 +1,7 @@
+<?php use CmuLms\View; $title='Preview exam'; include __DIR__.'/../layout/header.php'; ?>
+<section class="hero"><span><?=View::e($exam['code'])?> · Teacher preview</span><h1><?=View::e($exam['title'])?></h1><p><?=View::e($exam['pool_title'])?> · <?=count($questions)?> available questions · <?=View::e($exam['duration_minutes'])?> minutes</p></section>
+<section class="card"><div style="display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap"><div><h2>Question review</h2><p class="muted">Teacher-only preview. Correct answers are visible here; students never receive them.</p></div><a class="btn" href="?route=exam-edit&amp;id=<?=View::e($exam['id'])?>">Edit exam settings</a></div></section>
+<?php foreach($questions as $i=>$question): $options=json_decode($question['options']??'{}',true)?:[]; $answers=json_decode($question['answer']??'[]',true)?:[]; ?>
+<section class="card"><p><strong>Question <?=$i+1?></strong> · <?=View::e($question['points']??1)?> pt</p><h3><?=nl2br(View::e($question['prompt']))?></h3><ol type="A"><?php foreach($options as $key=>$option): ?><li class="<?=in_array((string)$key,array_map('strval',$answers),true)?'flash':''?>"><?=View::e($option)?> <?php if(in_array((string)$key,array_map('strval',$answers),true)): ?><strong>(Correct)</strong><?php endif; ?></li><?php endforeach; ?></ol></section>
+<?php endforeach; ?>
+<?php include __DIR__.'/../layout/footer.php'; ?>

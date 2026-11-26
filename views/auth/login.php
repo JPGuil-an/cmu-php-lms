@@ -1,0 +1,7 @@
+<?php use CmuLms\View;$title='Sign in';include __DIR__.'/../layout/header.php';?>
+<section class="card" style="max-width:430px;margin:70px auto"><h1>Welcome back</h1><p>Sign in with your school ID number.</p>
+<?php $remaining=max(0,(int)($_SESSION['login_lock_until']??0)-time());if($remaining>0): ?>
+<p id="loginCountdown" class="muted" role="status" aria-live="polite">Try again in <?=$remaining?> seconds.</p>
+<script>(()=>{const message=document.getElementById('loginCountdown'),ends=Date.now()+<?=$remaining?>*1000;const timer=setInterval(()=>{const seconds=Math.max(0,Math.ceil((ends-Date.now())/1000));message.textContent=seconds?'Try again in '+seconds+' seconds.':'You can try again. You have 5 login attempts.';if(!seconds)clearInterval(timer);},250);})();</script>
+<?php endif; ?>
+<form method="post" action="?route=login"><?=View::csrfField()?><input type="hidden" name="_action" value="login"><div class="field"><label for="loginId">School ID number</label><input id="loginId" name="id_number" required autocomplete="username"></div><div class="field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" name="password" required autocomplete="current-password"></div><button>Sign in</button></form><p style="margin:20px 0 0;text-align:center"><a href="?route=forgot-password" style="color:var(--green)">Forgot password?</a></p></section><?php include __DIR__.'/../layout/footer.php';?>

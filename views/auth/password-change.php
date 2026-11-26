@@ -1,0 +1,3 @@
+<?php use CmuLms\View; $title='Change password'; include __DIR__.'/../layout/header.php'; ?>
+<section class="card" style="max-width:500px;margin:60px auto"><h1>Change your password</h1><p>Your account uses a temporary password. Set a new password before continuing.</p><form method="post" action="?route=password-change"><?=View::csrfField()?><label>New password<input type="password" name="new_password" minlength="8" required></label><label>Confirm new password<input type="password" name="new_password_confirmation" minlength="8" required></label><button>Save password</button></form></section>
+<?php include __DIR__.'/../layout/footer.php'; ?>
